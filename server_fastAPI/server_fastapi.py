@@ -14,7 +14,11 @@ from diffusers import StableDiffusionPipeline
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # Stable Diffusion 3.5 Medium 모델 로드
-pipe = StableDiffusionPipeline.from_pretrained("stabilityai/stable-diffusion-3.5-medium", torch_dtype=torch.float16)
+pipe = StableDiffusionPipeline.from_pretrained(
+    "stabilityai/stable-diffusion-3.5-medium",
+    torch_dtype=torch.float16,
+    use_auth_token=True  # 토큰 사용
+)
 pipe.to(device)
 pipe.enable_attention_slicing()  # 메모리 최적화
 
@@ -50,3 +54,4 @@ if __name__ == "__main__":
         port=12530,  # 포트
         log_level="info",  # 로깅 레벨
     )
+
